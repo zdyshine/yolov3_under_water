@@ -1,0 +1,25 @@
+1.数据准备
+   1.创建文件夹Annotations和JPEGImages,分别存放.xml文件和.jpg文件，注意文件名要对应
+   将数据集Annotations、JPEGImages复制到YOLOV3工程目录下的data文件下；
+   同时新建两个文件夹，分别命名为ImageSets和labels，
+   最后我们将JPEGImages文件夹复制粘贴一下，并将文件夹重命名为images
+   2.根据网上教程，写代码makeTxt.py和voc_label.py，并根据自己的xml文件对代码进行修改
+   3.配置2个文件
+     1.在data文件下新建underwater.data，配置内容如下：classes=1
+		train=data/underwater_train.txt
+		valid=data/underwater_test.txt
+		names=data/underwater.names
+		backup=backup/
+		eval=coco
+	  2.再在data文件下新建underwater.names，配置内容如下：
+		holothurian
+		echinus
+		scallop
+		starfish
+2.修改cfg文件
+将cfg下的yolov3-tiny.cfg，搜索yolo,需要将上面的filters修改为 #3(class + 4 + 1)，这里2处地方
+                                   修改classes=4
+					
+3.下载权重
+
+python train.py --data-cfg data/underwater.data --cfg cfg/yolov3-tiny.cfg --epochs 10
